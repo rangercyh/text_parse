@@ -1,0 +1,122 @@
+@import './font.css';
+@import './animations.css';
+
+* {
+  user-select: none;
+  cursor: default;
+  font-family: 'Hind Guntur';
+  box-sizing: border-box;
+  outline: none;
+  -webkit-user-drag: none;
+}
+
+a, button {
+  cursor: pointer;
+}
+
+input {
+  cursor: text;
+}
+
+input[type=text] {
+  outline: none;
+  border: none;
+  padding: 0.5em;
+  font-size: 1em;
+  background: transparent;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.5);
+  }
+
+  &:focus {
+    background: rgba(255, 255, 255, 0.9);
+  }
+}
+
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  background: linear-gradient(to bottom, #e4ffe0, white);
+  background: linear-gradient(to bottom, #e4ffe0, #eeffeb);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+}
+
+#app {
+  height: 100%;
+}
+
+.toolbar {
+  height: 54px;
+  background: rgba(0,0,0,0.05);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  position: relative;
+  padding: 0 3em;
+
+  .load-text {
+    border-radius: 50%;
+    position: relative;
+    width: 65px;
+    height: 65px;
+    background: #0fd5f5;
+    top: -25px;
+
+    &:hover {
+      background: #01ADE4;
+
+      svg {
+        color: white;
+      }
+    }
+
+    cursor: pointer;
+
+    * {
+      cursor: pointer;
+      margin: 0 !important;
+    }
+
+    svg {
+      opacity: 0.75;
+      color: white;
+      width: 30px;
+      height: 30px;
+    }
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    align-content: center;
+
+    text-decoration: none;
+    text-transform: uppercase;
+    color: rgba(0,0,0,0.5);
+
+    * {
+      cursor: pointer;
+    }
+
+    &:hover {
+      color: #01ADE4;
+    }
+  }
+
+  span {
+    margin-left: 0.5em;
+    padding-top: 3px;
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "name": "text_parse",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rangercyh/text_parse.git"
+  },
+  "author": "caiyiheng",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rangercyh/text_parse/issues"
+  },
+  "homepage": "https://github.com/rangercyh/text_parse#readme",
+  "devDependencies": {
+    "electron": "^6.0.1",
+    "electron-packager": "^14.0.4",
+    "feather-icons": "^4.23.0",
+    "vue": "^2.6.10"
+  }
+}
