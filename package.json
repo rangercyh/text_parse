@@ -3,8 +3,16 @@
   "version": "1.0.0",
   "description": "",
   "main": "main.js",
+  "description": "little parse",
   "scripts": {
-    "start": "set NODE_ENV=development&& electron ."
+    "start": "set NODE_ENV=development&& electron .",
+    "build": "electron-builder --win --x64"
+  },
+  "build": {
+    "win": {
+      "target": "zip",
+      "icon": "src/assets/images/favicon.ico"
+    }
   },
   "repository": {
     "type": "git",
@@ -17,8 +25,11 @@
   },
   "homepage": "https://github.com/rangercyh/text_parse#readme",
   "dependencies": {
-    "electron": "^6.0.1",
     "feather-icons": "^4.23.0",
     "vue": "^2.6.10"
+  },
+  "devDependencies": {
+    "electron": "^6.0.1",
+    "electron-builder": "^21.2.0"
   }
 }
