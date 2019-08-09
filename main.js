@@ -2,6 +2,8 @@ const { app, BrowserWindow, Menu } = require('electron')
 
 const registerIpcListeners = require('./register-ipc')
 
+const env = process.env.NODE_ENV || 'production'
+
 // 保持对window对象的全局引用，如果不这么做的话，当JavaScript对象被
 // 垃圾回收的时候，window对象将会自动的关闭
 let win
@@ -17,10 +19,10 @@ function createWindow () {
   })
 
   // 加载index.html文件
-  win.loadFile('index.html')
+  win.loadFile('src/index.html')
 
   // 打开开发者工具
-  win.webContents.openDevTools()
+  if (env == 'development') win.webContents.openDevTools()
 
   // 当 window 被关闭，这个事件会被触发。
   win.on('closed', () => {

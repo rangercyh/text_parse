@@ -21,6 +21,10 @@ let app = new Vue({
     loadText: () => ipcRenderer.send('loadFile'),
 
     showAbout: () => ipcRenderer.send('showAbout'),
+
+    run: function() {
+
+    },
   },
 
   // Only show the application window when Vue has mounted
