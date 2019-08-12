@@ -140,57 +140,17 @@ body {
     padding-top: 3px; }
 
 .output-list {
-  background-color: rgba(0,0,0,0.25);
-  flex: 1;
-  display: flex;
-  overflow-y: scroll;
-  height: calc((100% - 108px)/2);
-  justify-content: center;
-  align-content: center;
-  align-items: center;
-  opacity: 0.3;
-  transition: opacity 0.4s;
+    height: calc((100% - 108px)/2);
+    position: relative;
 }
 
-.output-list:hover {
-  opacity: 0.5;
-}
-
-.output-list span {
-  padding-top: 4px;
-}
-
-.output-list ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-
-.output-list ul li {
-  padding: 0.5em;
-  transition: background-color 0.2s;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  align-content: center;
-}
-
-.output-list ul li  span {
-  padding-top: 4px;
-}
-
-.output-list ul li * {
-  cursor: pointer;
-}
-
-.output-list ul li:hover {
-  background-color: rgba(0,0,0,0.05);
-}
-
-.out-list p {
-  display: inline-flex;
-  align-items: center;
-  align-content: center;
+.output-list textarea {
+    height: calc(100% - 24px);
+    width: 98%;
+    position: relative;
+    margin: 10px;
+    border: 2px;
+    background-color: #72dbfd;
 }
 
 .output-list-tip {
@@ -240,10 +200,11 @@ body {
 }
 
 .input-text textarea {
-    height: calc(100% - 42px);
-    width: 100%;
+    height: calc(100% - 54px);
+    width: 98%;
     position: relative;
     margin: 10px;
+    padding-right: 100px;
     border: 2px;
     background-color: #72dbfd;
 }

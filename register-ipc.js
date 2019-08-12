@@ -41,7 +41,7 @@ function registerIpcListeners(mainWindow) {
         { name: 'Texts', extensions: ['txt'] }
       ],
       properties: [
-        'openFile', 'multiSelections'
+        'openFile'
       ]
     }, async paths => {
       if (!paths) return

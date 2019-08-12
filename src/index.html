@@ -20,13 +20,14 @@
             <span class="bnk"></span>
             转换句数：{{ output_list.length }}
           </label>
+          <button @click="str_format()" style="display: inline-block; margin-left: 100px; width: 100px; height: 28px;">紧凑</button>
           <input type="range" v-model.number="parse_text_max_num" min="0" v-bind:max="max_parse_text_num">
         </div>
       </div>
 
       <!-- input -->
       <div class="input-text">
-        <span>输入需要转换的文本：</span>
+        <span style="margin-left: 12px">输入需要转换的文本：</span>
         <br>
         <textarea v-model="message" placeholder="添加内容"></textarea>
       </div>
@@ -39,11 +40,7 @@
       </div>
       <!-- output list -->
       <div v-if="output_list.length" class="output-list">
-        <ul>
-          <li v-for="item in output_list">
-            <span>{{ item.idx }},{{ item.msg }} --->>> 长度：{{ item.len }}</span>
-          </li>
-        </ul>
+        <textarea v-bind:value="output_text"></textarea>
       </div>
       <!-- Toolbar -->
       <div class="toolbar">

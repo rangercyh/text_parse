@@ -13,18 +13,18 @@ const Vue = require('vue/dist/vue.min')
 const feather = require('feather-icons')
 const file_read = util.promisify(fs.readFile)
 
+const reg = /(，|。|？|！|~|、|；|……|——])/
+
 Vue.use(vueTips)
 feather.replace()
 
-let talk_obj = new Map()
-let start_idx = 1
-
 function init_something() {
-  talk_obj.clear()
-  start_idx = 1
-  talk_obj.set("玩家", start_idx++)
+  this.talk_obj.clear()
+  this.start_idx = 1
+  this.talk_obj.set("玩家", this.start_idx++)
   this.origin_line_num = 0
   this.output_list = []
+  this.output_text = ""
 }
 
 function split_msg(msg) {
@@ -55,13 +55,17 @@ function create_split_sentence(match_list) {
   let msg = match_list[2].trim()
   if (msg.length > this.parse_text_max_num) {
     let temp = ""
-    let sentence = msg.split(/(，|。|？|！|~|、|；|……|——])/)
+    let sentence = msg.split(reg)
     sentence.forEach(str => {
-      if ((temp + str).length < this.parse_text_max_num) {
+      if (reg.test(str)) {
         temp += str
       } else {
-        add_to_list(this.output_list, idx, temp)
-        temp = str
+        if ((temp + str).length < this.parse_text_max_num) {
+          temp += str
+        } else {
+          add_to_list(this.output_list, idx, temp)
+          temp = str
+        }
       }
     })
     if (temp.length > 0) {
@@ -69,6 +73,23 @@ function create_split_sentence(match_list) {
     }
   } else {
     add_to_list(this.output_list, idx, msg)
+  }
+}
+
+function format_text_string(compact) {
+  this.compact = compact
+  if (this.output_list.length > 0) {
+    this.output_text = ""
+    this.output_list.forEach(item => {
+      if (compact) {
+        this.output_text += ('{' + item.idx + ',' + item.msg + '},')
+      } else {
+        this.output_text += (item.idx + ', ' + item.msg + '    --->>> 长度：' + item.len + '\n')
+      }
+    })
+    if (compact) {
+      this.output_text = this.output_text.slice(0, -1)
+    }
   }
 }
 
@@ -84,7 +105,9 @@ let app = new Vue({
     parse_text_max_num: 27,
     message: "",
     talk_obj: new Map(),
-    start_idx: 1
+    start_idx: 1,
+    output_text: "",
+    compact: false,
   },
   watch: {
     parse_text_max_num: function(new_num, old_num) {
@@ -97,8 +120,6 @@ let app = new Vue({
     showAbout: () => ipcRenderer.send('showAbout'),
 
     run: function() {
-      console.log('run!')
-      console.log(this.message)
       let list = split_msg(this.message)
       if (list != undefined) {
         init_something.call(this)
@@ -111,7 +132,12 @@ let app = new Vue({
             }
           }
         })
+        format_text_string.call(this, false)
       }
+    },
+
+    str_format: function() {
+      format_text_string.call(this, !this.compact)
     },
   },
 
@@ -122,7 +148,7 @@ let app = new Vue({
 ipcRenderer.on('filesSelected', (e, args) => {
   if (args) args.forEach(file => {
     file_read(file.path).then((data) => {
-      app.message += iconv.decode(data, 'gbk')
+      app.message = iconv.decode(data, 'gbk')
     }).catch((error) => {
       console.error(error)
     })
