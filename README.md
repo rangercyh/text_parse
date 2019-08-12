@@ -9,5 +9,3 @@ To make a build:
 ```
 $ npm run build
 ```
-
-# License
