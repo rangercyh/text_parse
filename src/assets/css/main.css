@@ -72,6 +72,10 @@ input[type=text] {
     background: rgba(255, 255, 255, 0.5); }
   input[type=text]:focus {
     background: rgba(255, 255, 255, 0.9); }
+input[type=range] {
+  display: block;
+  width: 300px;
+}
 
 html, body {
   margin: 0;
@@ -134,3 +138,112 @@ body {
   .toolbar span {
     margin-left: 0.5em;
     padding-top: 3px; }
+
+.output-list {
+  background-color: rgba(0,0,0,0.25);
+  flex: 1;
+  display: flex;
+  overflow-y: scroll;
+  height: calc((100% - 108px)/2);
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  opacity: 0.3;
+  transition: opacity 0.4s;
+}
+
+.output-list:hover {
+  opacity: 0.5;
+}
+
+.output-list span {
+  padding-top: 4px;
+}
+
+.output-list ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.output-list ul li {
+  padding: 0.5em;
+  transition: background-color 0.2s;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  align-content: center;
+}
+
+.output-list ul li  span {
+  padding-top: 4px;
+}
+
+.output-list ul li * {
+  cursor: pointer;
+}
+
+.output-list ul li:hover {
+  background-color: rgba(0,0,0,0.05);
+}
+
+.out-list p {
+  display: inline-flex;
+  align-items: center;
+  align-content: center;
+}
+
+.output-list-tip {
+  background-color: rgba(0,0,0,0.25);
+  flex: 1;
+  display: flex;
+  height: calc((100% - 108px)/2);
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  opacity: 0.3;
+  transition: opacity 0.4s;
+}
+
+.out-list-tip:hover {
+  opacity: 0.5;
+}
+
+.out-list-tip p {
+  display: inline-flex;
+  align-items: center;
+  align-content: center;
+}
+
+.out-list-tip svg {
+  margin-right: 0.5em;
+}
+
+.out-list-tip span {
+  padding-top: 4px;
+}
+
+.statusbar {
+  height: 54px;
+  background: rgba(0, 0, 0, 0.05);
+  justify-content: space-around;
+  position: relative;
+  padding: 0 3em;
+}
+.statusbar span.bnk {
+  padding-left: 40px;
+}
+
+.input-text {
+    height: calc((100% - 108px)/2);
+    position: relative;
+}
+
+.input-text textarea {
+    height: calc(100% - 42px);
+    width: 100%;
+    position: relative;
+    margin: 10px;
+    border: 2px;
+    background-color: #72dbfd;
+}

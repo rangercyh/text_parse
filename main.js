@@ -13,6 +13,12 @@ function createWindow () {
   win = new BrowserWindow({
     width: 1400,
     height: 900,
+    resizable: true,
+    maximizable: true,
+    center: true,
+    fullscreenable: false,
+    minHeight: 600,
+    minWidth: 800,
     webPreferences: {
       nodeIntegration: true
     }
@@ -22,7 +28,7 @@ function createWindow () {
   win.loadFile('src/index.html')
 
   // 打开开发者工具
-  if (env == 'development') win.webContents.openDevTools()
+  // if (env == 'development') win.webContents.openDevTools()
 
   // 当 window 被关闭，这个事件会被触发。
   win.on('closed', () => {

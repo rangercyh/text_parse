@@ -7,6 +7,44 @@
   </head>
   <body>
     <div id="app">
+      <!-- Statusbar -->
+      <div class="statusbar">
+        <div>
+          <label>调整最大字数来改变切分：{{ parse_text_max_num }}</label>
+          <span class="bnk"></span>
+          <span class="bnk"></span>
+          <span class="bnk"></span>
+          <span class="bnk"></span>
+          <label>原始句数：{{ origin_line_num }}
+            <span class="bnk"></span>
+            <span class="bnk"></span>
+            转换句数：{{ output_list.length }}
+          </label>
+          <input type="range" v-model.number="parse_text_max_num" min="0" v-bind:max="max_parse_text_num">
+        </div>
+      </div>
+
+      <!-- input -->
+      <div class="input-text">
+        <span>输入需要转换的文本：</span>
+        <br>
+        <textarea v-model="message" placeholder="添加内容"></textarea>
+      </div>
+
+      <!-- tip -->
+      <div v-if="!output_list.length" class="output-list-tip">
+        <p>
+          <i data-feather="smile"></i> <span>这里显示转换后的文本！</span>
+        </p>
+      </div>
+      <!-- output list -->
+      <div v-if="output_list.length" class="output-list">
+        <ul>
+          <li v-for="item in output_list">
+            <span>{{ item.idx }},{{ item.msg }} --->>> 长度：{{ item.len }}</span>
+          </li>
+        </ul>
+      </div>
       <!-- Toolbar -->
       <div class="toolbar">
         <a href="#" @click="showAbout()"><i data-feather="help-circle"></i></a>
