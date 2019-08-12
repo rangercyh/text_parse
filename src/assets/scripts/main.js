@@ -13,7 +13,7 @@ const Vue = require('vue/dist/vue.min')
 const feather = require('feather-icons')
 const file_read = util.promisify(fs.readFile)
 
-const reg = /(，|。|？|！|~|、|；|……|——])/
+const reg_init = ["，", "。", "？", "！", "~", "、", "；", "……", "——"]
 
 Vue.use(vueTips)
 feather.replace()
@@ -55,9 +55,9 @@ function create_split_sentence(match_list) {
   let msg = match_list[2].trim()
   if (msg.length > this.parse_text_max_num) {
     let temp = ""
-    let sentence = msg.split(reg)
+    let sentence = msg.split(this.reg)
     sentence.forEach(str => {
-      if (reg.test(str)) {
+      if (this.reg.test(str)) {
         temp += str
       } else {
         if ((temp + str).length < this.parse_text_max_num) {
@@ -93,6 +93,22 @@ function format_text_string(compact) {
   }
 }
 
+function concat_split_key(list) {
+  let ret = ""
+  list.forEach(key => {
+    ret += key + '|'
+  })
+  return ret.slice(0, -1)
+}
+
+function get_split_reg(list) {
+  let reg = "("
+  list.forEach(key => {
+    reg += key + '|'
+  })
+  return new RegExp(reg.slice(0, -1) + ')')
+}
+
 // Create Vue app
 let app = new Vue({
   el: '#app',
@@ -108,10 +124,17 @@ let app = new Vue({
     start_idx: 1,
     output_text: "",
     compact: false,
+    split_key: reg_init,
+    split_str: concat_split_key(reg_init),
+    reg: get_split_reg(reg_init),
   },
   watch: {
     parse_text_max_num: function(new_num, old_num) {
       this.run()
+    },
+    split_str: function(value) {
+      this.split_key = value.split('|')
+      this.reg = get_split_reg(this.split_key)
     },
   },
   methods: {
@@ -139,10 +162,18 @@ let app = new Vue({
     str_format: function() {
       format_text_string.call(this, !this.compact)
     },
+
+    reset_reg: function() {
+      this.split_key = reg_init
+      this.split_str = concat_split_key(reg_init)
+      this.reg = get_split_reg(reg_init)
+    }
   },
 
   // Only show the application window when Vue has mounted
-  mounted: () => remote.getCurrentWindow().show()
+  mounted: () => {
+    remote.getCurrentWindow().show()
+  }
 })
 
 ipcRenderer.on('filesSelected', (e, args) => {

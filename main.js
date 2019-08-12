@@ -12,13 +12,13 @@ function createWindow () {
   // 创建浏览器窗口。
   win = new BrowserWindow({
     height: 900,
-    width: 1400,
+    width: 1200,
     resizable: true,
     maximizable: true,
     center: true,
     fullscreenable: false,
     minHeight: 600,
-    minWidth: 1200,
+    minWidth: 1100,
     webPreferences: {
       nodeIntegration: true
     }
