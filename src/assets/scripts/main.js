@@ -20,8 +20,8 @@ feather.replace()
 
 function init_something() {
   this.talk_obj.clear()
-  this.start_idx = 1
-  this.talk_obj.set("玩家", this.start_idx++)
+  this.start_idx = 20
+  this.talk_obj.set("玩家", 10)
   this.origin_line_num = 0
   this.output_list = []
   this.output_text = ""
