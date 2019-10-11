@@ -15,19 +15,21 @@
           <span class="bnk"></span>
           <span class="bnk"></span>
           <span class="bnk"></span>
-          <label>原始句数：{{ origin_line_num }}
-            <span class="bnk"></span>
-            <span class="bnk"></span>
-            转换句数：{{ output_list.length }}
-          </label>
-          <div>
-            <input type="range" v-model.number="parse_text_max_num" min="0" v-bind:max="max_parse_text_num">
-            <span style="margin-left: 35px">分隔符：</span><input style="width: 300px" type="text" v-model.trim="split_str">
-            <button @click="reset_reg()" style="display: inline-block; width: 100px; height: 32px;">重置分隔符</button>
-            <button @click="str_format()" style="display: inline-block; margin-left: 10px; width: 100px; height: 32px;">输出紧凑</button>
-          </div>
-        </div>
+          <label>原始句数：{{ origin_line_num }}</label>
+          <span class="bnk"></span>
+          <label>转换句数：{{ output_list.length }}</label>
+          <label for="player_index"><span class="bnk"></span>玩家序号：</label>
+          <input id="player_index" type="number" v-model.number="player_index" style="height: 25px; width: 80px; font-size: 18px">
+          <label for="npc_index"><span class="bnk"></span>npc序号起点：</label>
+          <input id="npc_index" type="number" v-model.number="npc_start_index" style="height: 25px; width: 80px; font-size: 18px">
+        <div>
+        <input type="range" v-model.number="parse_text_max_num" min="0" v-bind:max="max_parse_text_num">
+        <span style="margin-left: 35px">分隔符：</span><input style="width: 300px" type="text" v-model.trim="split_str">
+        <button @click="reset_reg()" style="display: inline-block; width: 100px; height: 32px;">重置分隔符</button>
+        <button @click="str_format()" style="display: inline-block; margin-left: 10px; width: 100px; height: 32px;">输出紧凑</button>
       </div>
+    </div>
+  </div>
 
       <!-- input -->
       <div class="input-text">
@@ -44,7 +46,7 @@
       </div>
       <!-- output list -->
       <div v-if="output_list.length" class="output-list">
-        <textarea v-bind:value="output_text"></textarea>
+        <textarea v-model="output_text"></textarea>
       </div>
       <!-- Toolbar -->
       <div class="toolbar">
