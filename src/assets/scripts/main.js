@@ -116,6 +116,7 @@ function parse_text_string(compact) {
           }
         }
       })
+      this.output_text = this.output_text.slice(0, -1)
     }
   } else {
     let list = split_sentence(this.output_text)
